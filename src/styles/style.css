@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap');
+
+@import url('reset.css');
+
+:root {
+    /* SYSTEM FONTS */
+    --system-ui: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol';
+
+    /* COLORS */
+    --white: #e6e6e6;
+    --gray: #d5d5d5;
+    --yellow-lt: #eed9c3;
+    --yellow: #e3b261;
+    --green: #a78347;
+    --green-dk: #353535;
+    --blue: #111827;
+
+    --blue-tr: #111827dd;
+    --white-tr: #ffffff44;
+    --hightlight-off: #ffffff00;
+    --hightlight-on: #ffffff88;
+}
+
+body {
+    background: url('../assets/images/bg.webp') no-repeat var(--blue) center center;
+    background-size: cover;
+    background-blend-mode: multiply;
+    object-fit: cover;
+    font-family: 'Roboto Slab', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gray);
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: var(--yellow-lt);
+}
+
+a:hover {
+    color: var(--yellow);
+}
+
+header {
+    margin-top: 42px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: var(--yellow);
+}
+
+h2 {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin: 8px;
+}
+
+footer .odin {
+    margin: 8px;
+    width: 24px;
+    height: 33px;
+    background: url('../assets/images/logo-odin-colored.svg') no-repeat center center;
+}

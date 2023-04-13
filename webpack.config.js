@@ -20,18 +20,13 @@ module.exports = {
         },
         port: 8888,
         open: true, // open browser
-        hot: false, // hot reload
+        hot: true, // hot reload
         liveReload: true, // if this is true, hot should be false
         compress: true, // enable gzip compression
         historyApiFallback: true, // enable browser history fallback
     },
     module: {
         rules: [
-            {
-                // HTML LOADER THAT CAN FETCH IMG IN ITS FILE
-                test: /\.html$/,
-                use: ['html-loader'],
-            },
             {
                 // IMAGE LOADERS
                 test: /\.(png|jpg|jpeg|gif|svg)$/i,
@@ -68,6 +63,11 @@ module.exports = {
                         presets: ['@babel/preset-env'],
                     },
                 },
+            },
+            {
+                // HTML LOADER THAT CAN FETCH IMG IN ITS FILE
+                test: /\.html$/,
+                use: ['html-loader'],
             },
         ],
     },
