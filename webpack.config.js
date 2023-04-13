@@ -18,7 +18,7 @@ module.exports = {
             // what directory to serve
             directory: path.resolve(__dirname, 'dist'),
         },
-        port: 8080,
+        port: 8888,
         open: true, // open browser
         hot: false, // hot reload
         liveReload: true, // if this is true, hot should be false
