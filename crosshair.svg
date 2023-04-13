@@ -1,8 +1,8 @@
 <svg width="370" height="370" viewBox="0 0 370 370" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g opacity="0.2">
-<path d="M209 184.5L370 184.5M0 184.5L161 184.5" stroke="#E6E6E6"/>
+<path opacity="0.5" d="M209 184.5L370 184.5M0 184.5L161 184.5" stroke="#E6E6E6"/>
 <line y1="-1.5" x2="28" y2="-1.5" transform="matrix(-4.37114e-08 -1 -1 4.37114e-08 184 198)" stroke="#E6E6E6" stroke-width="3"/>
 <line y1="-1.5" x2="28" y2="-1.5" transform="matrix(1 0 0 -1 171 183)" stroke="#E6E6E6" stroke-width="3"/>
-<path d="M185.5 161L185.5 0M185.5 370L185.5 208" stroke="#E6E6E6"/>
+<path opacity="0.5" d="M185.5 161L185.5 0M185.5 370L185.5 208" stroke="#E6E6E6"/>
 </g>
 </svg>
