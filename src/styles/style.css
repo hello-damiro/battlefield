@@ -89,6 +89,7 @@ h3 {
 em {
     line-height: 1.6rem;
 }
+
 h4 {
     text-transform: uppercase;
     letter-spacing: 0.1rem;
@@ -100,7 +101,7 @@ main {
     display: flex;
     gap: 32px;
     width: 100%;
-    max-width: 800px;
+    max-width: 880px;
 }
 
 .main-map {
@@ -108,11 +109,15 @@ main {
     aspect-ratio: 1/1;
 }
 
-.row-map {
+.column {
     padding: 1px;
     background: url('../assets/images/crosshair.svg') no-repeat center center;
     background-size: cover;
     border-radius: 6px;
+}
+
+.row {
+    display: flex;
 }
 
 .border-red {
@@ -121,10 +126,6 @@ main {
 
 .border-blue {
     border: 1px solid var(--royal-blue);
-}
-
-.column-map {
-    display: flex;
 }
 
 .cell {
