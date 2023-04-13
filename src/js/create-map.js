@@ -18,6 +18,8 @@ export const createMap = (div, length, monitor) => {
     function createCell(parent) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
+        const nucleus = document.createElement('div');
+        cell.appendChild(nucleus);
         parent.appendChild(cell);
     }
 

@@ -59,7 +59,7 @@ a:hover {
 }
 
 header {
-    margin-top: 42px;
+    margin: 42px 0;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -168,9 +168,16 @@ main {
     flex-direction: column;
 }
 
+.configure-ship .ship {
+    /* background-color: red; */
+    background-size: auto;
+    height: 37px;
+    display: block;
+}
+
 .current-ship {
     display: flex;
-    margin-top: 32px;
+    margin: 32px 0 16px 0;
     align-items: center;
 }
 
@@ -194,11 +201,11 @@ main {
 .ship-lineup li {
     margin-top: 16px;
     opacity: 0.4;
+    height: 37px;
 }
 
 .ship {
     height: 37px;
-    background: red;
     display: block;
 }
 
@@ -235,6 +242,12 @@ main {
     background-size: 100% auto;
     height: 100%;
     aspect-ratio: 2/1;
+}
+
+.vertical-show {
+    transform: rotate(90deg);
+    transform-origin: bottom left;
+    margin-top: -37px;
 }
 
 .vertical {
