@@ -110,10 +110,10 @@ main {
 }
 
 .column {
-    padding: 1px;
+    padding: 4px;
     background: url('../assets/images/crosshair.svg') no-repeat center center;
     background-size: cover;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 .row {
@@ -129,18 +129,18 @@ main {
 }
 
 .cell {
-    background: #ffffff06;
+    background-color: #ffffff06;
     overflow: visible;
     width: 100%;
     aspect-ratio: 1/1;
-    /* margin: 1px; */
-    /* opacity: 0.02; */
+    margin: 1px;
     cursor: pointer;
 }
 
 .cell:hover {
-    opacity: 0.2;
-    background: var(--green);
+    background: url('../assets/images/pointer.svg') no-repeat center center;
+    background-color: #ffffff06;
+    background-size: 100%;
 }
 
 .hit {
@@ -211,18 +211,30 @@ main {
 
 .battleship {
     background: url('../assets/images/ship-battleship.svg') no-repeat left center;
+    background-size: 100% auto;
+    height: 100%;
+    aspect-ratio: 4/1;
 }
 
 .cruiser {
     background: url('../assets/images/ship-cruiser.svg') no-repeat left center;
+    background-size: 100% auto;
+    height: 100%;
+    aspect-ratio: 4/1;
 }
 
 .submarine {
     background: url('../assets/images/ship-submarine.svg') no-repeat left center;
+    background-size: 100% auto;
+    height: 100%;
+    aspect-ratio: 3/1;
 }
 
 .destroyer {
     background: url('../assets/images/ship-destroyer.svg') no-repeat left center;
+    background-size: 100% auto;
+    height: 100%;
+    aspect-ratio: 2/1;
 }
 
 .vertical {
