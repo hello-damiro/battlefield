@@ -16,6 +16,9 @@
     --green-dk: #353535;
     --blue: #111827;
 
+    --royal-red: #ff3232;
+    --royal-blue: #1e4db1;
+
     --blue-tr: #111827dd;
     --white-tr: #ffffff44;
     --hightlight-off: #ffffff00;
@@ -51,7 +54,7 @@ a {
 }
 
 a:hover {
-    color: var(--yellow);
+    color: var(--red);
 }
 
 header {
@@ -72,6 +75,109 @@ h1 {
 h2 {
     text-transform: uppercase;
     letter-spacing: 0.1rem;
+}
+
+h3 {
+    letter-spacing: 0.1rem;
+    color: var(--yellow);
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+h4 {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--yellow);
+    font-weight: 700;
+}
+
+main {
+    display: flex;
+    gap: 42px;
+}
+
+.column-map {
+    display: flex;
+}
+
+.cell {
+    background: var(--royal-blue);
+    width: 50px;
+    aspect-ratio: 1/1;
+    margin: 1px;
+    cursor: pointer;
+}
+
+.cell:hover {
+    background: var(--yellow);
+}
+
+.cockpit {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    gap: 64px;
+}
+
+.configure-ship {
+    display: flex;
+    flex-direction: column;
+}
+
+.current-ship {
+    display: flex;
+    margin-top: 32px;
+    align-items: center;
+}
+
+.rotate {
+    background: url('../assets/images/rotate.svg') no-repeat center center;
+    width: 32px;
+    height: 32px;
+    margin-left: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.rotate:hover {
+    background-color: var(--white-tr);
+}
+
+.ship-lineup {
+    text-align: left;
+}
+
+.ship-lineup li {
+    margin-top: 16px;
+    opacity: 0.4;
+}
+
+.ship {
+    height: 37px;
+    background: red;
+    display: block;
+}
+
+.carrier {
+    background: url('../assets/images/ship-carrier.svg') no-repeat left center;
+}
+
+.battleship {
+    background: url('../assets/images/ship-battleship.svg') no-repeat left center;
+}
+
+.cruiser {
+    background: url('../assets/images/ship-cruiser.svg') no-repeat left center;
+}
+
+.submarine {
+    background: url('../assets/images/ship-submarine.svg') no-repeat left center;
+}
+
+.destroyer {
+    background: url('../assets/images/ship-destroyer.svg') no-repeat left center;
 }
 
 footer {
