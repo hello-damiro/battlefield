@@ -8,7 +8,7 @@
         "deploy": "webpack --mode=production",
         "clean": "rm -rf dist/*",
         "build": "npm run clean && npm run deploy",
-        "test": "jest --verbose ./projects/battleship/",
+        "test": "jest --verbose ./src/js/",
         "push": "git subtree push --prefix dist origin gh-pages"
     },
     "keywords": [],
