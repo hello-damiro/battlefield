@@ -16,7 +16,7 @@
         </header>
         <main>
             <div class="main-map">
-                <div class="row-map">
+                <div class="row-map border-red">
                     <div class="column-map">
                         <div class="cell"></div>
                         <div class="cell"></div>
@@ -30,9 +30,11 @@
                         <div class="cell"></div>
                     </div>
                     <div class="column-map">
-                        <div class="cell"></div>
-                        <div class="cell"></div>
-                        <div class="cell"></div>
+                        <div class="cell miss"></div>
+                        <div class="cell hit"></div>
+                        <div class="cell">
+                            <div class="carrier"></div>
+                        </div>
                         <div class="cell"></div>
                         <div class="cell"></div>
                         <div class="cell"></div>
@@ -140,18 +142,142 @@
                 </div>
             </div>
             <div class="cockpit">
+                <div class="main-map">
+                    <div class="row-map border-blue">
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                        <div class="column-map">
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                            <div class="cell"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="configure-ship">
                     <div>
                         <h3>Enemy Approaching...</h3>
                         <em>Place your submarine into position!</em>
-                        <div class="current-ship">
+                        <div class="current-ship hidden">
                             <h4>Submarine:</h4>
                             <div class="rotate"></div>
                         </div>
                     </div>
-                    <div class="ship submarine"></div>
+                    <div class="ship submarine hidden"></div>
                 </div>
-                <div class="ship-lineup">
+                <div class="ship-lineup hidden">
                     <h4>Fleet:</h4>
                     <ul>
                         <li class="ship carrier"></li>
@@ -163,13 +289,10 @@
             </div>
         </main>
         <footer>
-            <a href="https://theodinproject.com">
-                <h4>Made with Odin</h4>
-            </a>
+
+            <h4><a href="https://theodinproject.com">Made with Odin</a></h4>
             <div class="odin" href="https://theodinproject.com"></div>
-            <a href="https://github.com/hello-damiro/">
-                <h4>Hello-Damiro</h4>
-            </a>
+            <h4><a href="https://github.com/hello-damiro/">Hello-Damiro</a></h4>
         </footer>
     </div>
 </body>

@@ -46,6 +46,7 @@ body {
     align-items: center;
     justify-content: space-between;
     text-align: center;
+    margin: 0 32px;
 }
 
 a {
@@ -80,11 +81,14 @@ h2 {
 h3 {
     letter-spacing: 0.1rem;
     color: var(--yellow);
-    font-size: 1.6rem;
-    font-weight: 400;
-    margin-bottom: 8px;
+    font-size: 2rem;
+    font-weight: 100;
+    margin-bottom: 16px;
+    line-height: 2.6rem;
 }
-
+em {
+    line-height: 1.6rem;
+}
 h4 {
     text-transform: uppercase;
     letter-spacing: 0.1rem;
@@ -94,7 +98,29 @@ h4 {
 
 main {
     display: flex;
-    gap: 42px;
+    gap: 32px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.main-map {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.row-map {
+    padding: 1px;
+    background: url('../assets/images/crosshair.svg') no-repeat center center;
+    background-size: cover;
+    border-radius: 6px;
+}
+
+.border-red {
+    border: 1px solid var(--royal-red);
+}
+
+.border-blue {
+    border: 1px solid var(--royal-blue);
 }
 
 .column-map {
@@ -102,23 +128,38 @@ main {
 }
 
 .cell {
-    background: var(--royal-blue);
-    width: 50px;
+    background: #ffffff06;
+    overflow: visible;
+    width: 100%;
     aspect-ratio: 1/1;
-    margin: 1px;
+    /* margin: 1px; */
+    /* opacity: 0.02; */
     cursor: pointer;
 }
 
 .cell:hover {
-    background: var(--yellow);
+    opacity: 0.2;
+    background: var(--green);
+}
+
+.hit {
+    opacity: 0.2;
+    background: var(--royal-red);
+}
+
+.miss {
+    opacity: 0.2;
+    background: var(--royal-blue);
 }
 
 .cockpit {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-align: left;
     gap: 64px;
+    min-width: 260px;
+    text-align: left;
+    padding-bottom: 4px;
 }
 
 .configure-ship {
@@ -162,6 +203,9 @@ main {
 
 .carrier {
     background: url('../assets/images/ship-carrier.svg') no-repeat left center;
+    background-size: 100% auto;
+    height: 100%;
+    aspect-ratio: 5/1;
 }
 
 .battleship {
@@ -178,6 +222,20 @@ main {
 
 .destroyer {
     background: url('../assets/images/ship-destroyer.svg') no-repeat left center;
+}
+
+.vertical {
+    transform: rotate(90deg);
+    transform-origin: top left;
+    margin-left: 100%;
+}
+
+.no-click {
+    pointer-events: none;
+}
+
+.hidden {
+    display: none;
 }
 
 footer {

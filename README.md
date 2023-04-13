@@ -10,6 +10,10 @@ LIVE SITE [HERE](https://hello-damiro.github.io/battlefield)
 
 </br>
 
+Some nice [warships](https://www.shutterstock.com/g/Konstantin+Petrov/sets/178552838)
+
+</br>
+
 ## Screenshot
 
 ![Screenshot](https://github.com/hello-damiro/battlefield/blob/main/src/assets/images/screenshot.png?raw=true)
