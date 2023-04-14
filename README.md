@@ -8,7 +8,7 @@ LIVE SITE [HERE](https://hello-damiro.github.io/battlefield)
 
 **Day 1:** Created modules for player, ship, gameboard. Pending gameloop since I think UI will matter when designing it. Designed basic UI at figma.
 
-**Day 2:** Coded CSS/JS UI functionalties. Modularized UI factory functions.
+**Day 2:** Coded CSS/JS UI functionalties. Modularized UI factory functions. Struggle in Implementing PubSub.
 
 </br>
 

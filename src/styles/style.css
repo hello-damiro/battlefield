@@ -152,20 +152,18 @@ main {
 }
 
 .main-map {
-    width: 230%;
+    width: 300%;
     aspect-ratio: 1/1;
+    flex-grow: 3;
 }
 
 .cockpit {
     width: 100%;
-    /* width: min-content; */
     display: flex;
     flex-wrap: wrap;
     gap: 32px;
     justify-content: space-between;
     text-align: left;
-    padding-bottom: 4px;
-    /* background: red; */
 }
 
 .monitor-map {

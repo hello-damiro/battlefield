@@ -1,9 +1,29 @@
 import { $, _$ } from '../helpers';
+import { events } from '../pubsub';
 
 export const playerSetUp = (ships) => {
     let shipIndex = 0;
+    let shipsInPlace = 0;
     let ship = ships[shipIndex];
-    let rotate = false;
+    let isRotated = false;
+    let selectedShip = { x: 0, y: 0 };
+
+    const startButton = $('.start');
+    startButton.addEventListener('click', () => {
+        $('.main-map').classList.toggle('hidden');
+        $('.dock-group').classList.toggle('hidden');
+        $('.ship-lineup').classList.toggle('hidden');
+        startButton.classList.add('hidden');
+    });
+
+    function gameReady() {
+        if (shipsInPlace === 5) {
+            // map.disableCells(); // call if player setup is done
+            startButton.classList.remove('hidden');
+            const textH3 = $('.configure-ship > h3');
+            textH3.textContent = 'Engage enemy!';
+        }
+    }
 
     function listShips() {
         const ul = $('.ship-lineup ul');
@@ -18,15 +38,12 @@ export const playerSetUp = (ships) => {
     function selectShip(index) {
         shipIndex = index;
         ship = ships[index];
-
         const shipOnDock = $('.ship > div');
         shipOnDock.setAttribute('class', '');
         shipOnDock.classList.add(ship.type);
-
-        const shipH4 = $('.dock-name > h4');
-        shipH4.textContent = ship.type;
-
-        console.log(index + ': ' + rotate + ' ' + ship.type);
+        const textH4 = $('.dock-name > h4');
+        textH4.textContent = ship.type;
+        // console.log(index + ': ' + isRotated + ' ' + ship.type);
     }
 
     function rotateShip() {
@@ -34,33 +51,47 @@ export const playerSetUp = (ships) => {
         const rotateButton = $('.rotate');
         rotateButton.addEventListener('click', () => {
             ship.classList.toggle('config-vertical');
-            rotate = !rotate;
+            isRotated = !isRotated;
         });
     }
 
     function positionShip() {
         const cells = _$('.monitor-map .cell');
         cells.forEach((cell) => {
-            let set = false;
+            let isPermanent = false;
             const nucleus = cell.querySelector('.nucleus');
             cell.addEventListener('click', () => {
-                set = true;
-                cell.classList.add('no-click');
-                // cell.classList.add('empty');
-                nucleus.classList.add(ship.type);
-                if (rotate) nucleus.classList.add('vertical');
+                isPermanent = true;
+                clickNucleusHandler(nucleus, ship.type, true, isRotated, isPermanent);
+                clickCellHandler(cell);
             });
-            cell.addEventListener('mouseover', () => {
-                nucleus.classList.add(ship.type);
-                if (rotate) nucleus.classList.add('vertical');
-            });
-            cell.addEventListener('mouseout', () => {
-                if (!set) {
-                    nucleus.classList.remove(ship.type);
-                    nucleus.classList.remove('vertical');
-                }
-            });
+            cell.addEventListener('mouseover', () =>
+                clickNucleusHandler(nucleus, ship.type, true, isRotated, isPermanent)
+            );
+            cell.addEventListener('mouseout', () =>
+                clickNucleusHandler(nucleus, ship.type, false, isRotated, isPermanent)
+            );
         });
+    }
+
+    function clickNucleusHandler(nucleus, type, over, rotated, permanent) {
+        if (over) {
+            nucleus.classList.add(type);
+            if (rotated) nucleus.classList.add('vertical');
+        } else {
+            if (!permanent) {
+                nucleus.classList.remove(type);
+                nucleus.classList.remove('vertical');
+            }
+        }
+    }
+
+    function clickCellHandler(cell) {
+        selectedShip.x = cell.getAttribute('data-x');
+        selectedShip.y = cell.getAttribute('data-y');
+        cell.classList.add('no-click');
+        shipsInPlace++;
+        events.emit('cell-XY', selectedShip);
     }
 
     rotateShip();
