@@ -26,9 +26,7 @@ Some nice [warships](https://www.shutterstock.com/g/Konstantin+Petrov/sets/17855
 
 1. Create factory functions for the `ship`, `gameboard`, `player` and test using `jest`.
 
-2. Create the main game loop and a module for DOM interaction
-
-3. Create the main game loop and a module for DOM interaction.
+2. Create the main game loop and a module for DOM interaction.
     1. At this point it is appropriate to begin crafting your User Interface.
     2. The game loop should set up a new game by creating Players and Gameboards.For now just populate each Gameboard with predetermined coordinates. You can implement a system for allowing players to place their ships later.
     3. We’ll leave the HTML implementation up to you for now, but you should display both the player’s boards and render them using information from the Gameboard class.
