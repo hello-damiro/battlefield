@@ -39,14 +39,14 @@ export const playerSetUp = (ships) => {
     }
 
     function positionShip() {
-        const cells = _$('.cell');
+        const cells = _$('.monitor-map .cell');
         cells.forEach((cell) => {
             let set = false;
             const nucleus = cell.querySelector('.nucleus');
             cell.addEventListener('click', () => {
                 set = true;
                 cell.classList.add('no-click');
-                cell.classList.add('empty');
+                // cell.classList.add('empty');
                 nucleus.classList.add(ship.type);
                 if (rotate) nucleus.classList.add('vertical');
             });
