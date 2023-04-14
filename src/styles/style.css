@@ -204,7 +204,7 @@ main {
     height: 37px;
 }
 
-.ship {
+.dock {
     height: 37px;
     display: block;
 }
@@ -214,6 +214,9 @@ main {
     background-size: 100% auto;
     height: 100%;
     aspect-ratio: 5/1;
+    transform-origin: bottom left;
+    transform: rotate(0deg);
+    transition: transform 0.5s ease, margin 0.5s linear;
 }
 
 .battleship {
@@ -242,12 +245,16 @@ main {
     background-size: 100% auto;
     height: 100%;
     aspect-ratio: 2/1;
+    transform-origin: bottom left;
+    transform: rotate(0deg);
+    transition: transform 0.5s ease, margin 0.5s linear;
 }
 
-.vertical-show {
-    transform: rotate(90deg);
-    transform-origin: bottom left;
+.config-vertical {
     margin-top: -37px;
+    transform: rotate(90deg);
+    /* transform-origin: bottom left; */
+    /* transition: transform 0.5s linear, margin 0.5s linear; */
 }
 
 .vertical {

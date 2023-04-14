@@ -5,6 +5,7 @@ import { createMap } from './js/create-map';
 const map = $('.main-map');
 const miniMap = $('.monitor-map');
 const shipsLineup = $('.ship-lineup ul');
+const rotate = $('.rotate');
 const grid = 10;
 
 createMap(map, grid);
@@ -22,10 +23,19 @@ function positionShip() {}
 
 function listShips() {}
 
+function rotateShip() {
+    const ship = $('.dock > div');
+    rotate.addEventListener('click', () => {
+        ship.classList.toggle('config-vertical');
+    });
+}
+
+rotateShip();
+
 // const ships = [
-//     { type: carrier, space: 5 },
-//     { type: battleship, space: 4 },
-//     { type: cruiser, space: 4 },
-//     { type: submarine, space: 3 },
-//     { type: destroyer, space: 2 },
+//     { type: carrier, length: 5 },
+//     { type: battleship, length: 4 },
+//     { type: cruiser, length: 4 },
+//     { type: submarine, length: 3 },
+//     { type: destroyer, length: 2 },
 // ];
