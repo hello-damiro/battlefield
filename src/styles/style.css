@@ -149,9 +149,14 @@ main {
     background: var(--royal-red);
 }
 
+.empty,
 .miss {
-    opacity: 0;
-    /* background: var(--royal-blue); */
+    background-color: #ffffff00;
+    /* opacity: 0;
+    background: var(--royal-blue); */
+}
+
+.preview {
 }
 
 .cockpit {
@@ -197,6 +202,14 @@ main {
     display: block;
 }
 
+.ship {
+    height: 37px;
+    display: block;
+    transform-origin: bottom left;
+    transform: rotate(0deg);
+    transition: transform 0.5s ease, margin 0.5s linear;
+}
+
 .ship-lineup {
     text-align: left;
 }
@@ -205,6 +218,11 @@ main {
     margin-top: 12px;
     opacity: 0.4;
     height: 37px;
+    cursor: pointer;
+}
+
+.ship-lineup li:hover {
+    opacity: 1;
 }
 
 .carrier {
@@ -212,9 +230,6 @@ main {
     background-size: 100% auto;
     height: 100%;
     aspect-ratio: 5/1;
-    transform-origin: bottom left;
-    transform: rotate(0deg);
-    transition: transform 0.5s ease, margin 0.5s linear;
 }
 
 .battleship {
@@ -222,9 +237,6 @@ main {
     background-size: 100% auto;
     height: 100%;
     aspect-ratio: 4/1;
-    transform-origin: bottom left;
-    transform: rotate(0deg);
-    transition: transform 0.5s ease, margin 0.5s linear;
 }
 
 .cruiser {
@@ -232,9 +244,6 @@ main {
     background-size: 100% auto;
     height: 100%;
     aspect-ratio: 4/1;
-    transform-origin: bottom left;
-    transform: rotate(0deg);
-    transition: transform 0.5s ease, margin 0.5s linear;
 }
 
 .submarine {
@@ -242,9 +251,6 @@ main {
     background-size: 100% auto;
     height: 100%;
     aspect-ratio: 3/1;
-    transform-origin: bottom left;
-    transform: rotate(0deg);
-    transition: transform 0.5s ease, margin 0.5s linear;
 }
 
 .destroyer {
@@ -252,9 +258,6 @@ main {
     background-size: 100% auto;
     height: 100%;
     aspect-ratio: 2/1;
-    transform-origin: bottom left;
-    transform: rotate(0deg);
-    transition: transform 0.5s ease, margin 0.5s linear;
 }
 
 .config-vertical {
@@ -268,6 +271,7 @@ main {
     margin-left: 100%;
 }
 
+.nucleus,
 .no-click {
     pointer-events: none;
 }

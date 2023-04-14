@@ -12,13 +12,14 @@ export const createMap = (div, length, monitor) => {
         const rowCells = document.createElement('div');
         rowCells.classList.add('row');
         parent.appendChild(rowCells);
-        for (let index = 0; index < length; index++) createCell(rowCells);
+        for (let index = length; index > 0; index--) createCell(rowCells);
     }
 
     function createCell(parent) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
         const nucleus = document.createElement('div');
+        nucleus.classList.add('nucleus');
         cell.appendChild(nucleus);
         parent.appendChild(cell);
     }
