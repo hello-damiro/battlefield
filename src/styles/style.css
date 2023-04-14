@@ -81,13 +81,13 @@ h2 {
 h3 {
     letter-spacing: 0.1rem;
     color: var(--yellow);
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     font-weight: 100;
-    margin-bottom: 16px;
     line-height: 1.4rem;
 }
 
 em {
+    margin-top: 16px;
     line-height: 1.6rem;
 }
 
@@ -175,11 +175,11 @@ main {
     gap: 32px;
 }
 
-.configure-ship > div ~ div {
+.dock-group {
     height: 220px;
 }
 
-.current-ship {
+.dock-name {
     display: flex;
     align-items: center;
 }
