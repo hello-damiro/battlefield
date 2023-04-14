@@ -24,7 +24,7 @@ function positionShip() {}
 function listShips() {}
 
 function rotateShip() {
-    const ship = $('.dock > div');
+    const ship = $('.dock > .ship');
     rotate.addEventListener('click', () => {
         ship.classList.toggle('config-vertical');
     });
