@@ -14,13 +14,9 @@ const enemyMap = createMap(map, grid, false);
 const playerMap = createMap(miniMap, grid, true);
 playerSetUp(ships);
 
-function engageGame() {
-    const cells = _$('.main-map .cell');
-    cells.forEach((cell) => {
-        cell.addEventListener('click', () => {
-            cell.classList.add('empty');
-        });
-    });
+events.on('disableMap', disableMap);
+function disableMap(disable) {
+    if (disable) playerMap.disableCells();
 }
 
 events.on('cell-XY', printCellCoordinates);
@@ -28,4 +24,8 @@ function printCellCoordinates(xyCoord) {
     console.log('cell: ' + xyCoord.x + ', ' + xyCoord.y);
 }
 
-engageGame();
+events.on('text-h3', printH3Text);
+function printH3Text(text) {
+    const textH3 = $('.configure-ship h3');
+    textH3.textContent = text;
+}
