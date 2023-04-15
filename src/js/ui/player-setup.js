@@ -10,7 +10,7 @@ export const playerSetUp = (ships) => {
 
     const startButton = $('.start');
     startButton.addEventListener('click', () => {
-        $('.main-map').classList.toggle('hidden');
+        $('.screen').classList.toggle('hidden');
         $('.dock-group').classList.toggle('hidden');
         $('.ship-lineup').classList.toggle('hidden');
         startButton.classList.add('hidden');
@@ -62,19 +62,19 @@ export const playerSetUp = (ships) => {
             const nucleus = cell.querySelector('.nucleus');
             cell.addEventListener('click', () => {
                 isPermanent = true;
-                clickNucleusHandler(nucleus, ship.type, true, isRotated, isPermanent);
+                hoverNucleusHandler(nucleus, ship.type, true, isRotated, isPermanent);
                 clickCellHandler(cell);
             });
             cell.addEventListener('mouseover', () =>
-                clickNucleusHandler(nucleus, ship.type, true, isRotated, isPermanent)
+                hoverNucleusHandler(nucleus, ship.type, true, isRotated, isPermanent)
             );
             cell.addEventListener('mouseout', () =>
-                clickNucleusHandler(nucleus, ship.type, false, isRotated, isPermanent)
+                hoverNucleusHandler(nucleus, ship.type, false, isRotated, isPermanent)
             );
         });
     }
 
-    function clickNucleusHandler(nucleus, type, over, rotated, permanent) {
+    function hoverNucleusHandler(nucleus, type, over, rotated, permanent) {
         if (over) {
             nucleus.classList.add(type);
             if (rotated) nucleus.classList.add('vertical');

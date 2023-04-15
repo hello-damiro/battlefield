@@ -98,13 +98,6 @@ h4 {
     font-weight: 700;
 }
 
-main {
-    display: flex;
-    gap: 32px;
-    width: 100%;
-    max-width: 880px;
-}
-
 .column {
     padding: 4px;
     background: url('../assets/images/crosshair.svg') no-repeat center center;
@@ -151,14 +144,17 @@ main {
     background: var(--royal-blue); */
 }
 
-.main-map {
-    width: 300%;
-    aspect-ratio: 1/1;
-    flex-grow: 3;
+main {
+    display: flex;
+    gap: 32px;
+    width: 100%;
+    justify-content: center;
+    max-width: 880px;
 }
 
-.cockpit {
-    width: 100%;
+.screen {
+    flex-grow: 3;
+    width: 300%;
     display: flex;
     flex-wrap: wrap;
     gap: 32px;
@@ -166,16 +162,31 @@ main {
     text-align: left;
 }
 
+.main-map {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.cockpit {
+    flex-grow: 1;
+    min-width: 260px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: start;
+    text-align: left;
+}
+
 .monitor-map {
-    width: 66%;
+    width: calc(100% - (260px + 32px));
     min-width: 260px;
 }
 
 .configure-ship {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    width: 260px;
+    gap: 24px;
+    justify-content: space-between;
 }
 
 .dock-group {
@@ -185,6 +196,7 @@ main {
 .dock-name {
     display: flex;
     align-items: center;
+    margin-bottom: 8px;
 }
 
 .rotate {
@@ -232,7 +244,16 @@ main {
 }
 
 .ship-lineup {
-    text-align: left;
+    /* background: red; */
+    height: 220px;
+}
+
+.ship-lineup ul {
+    /* background: blue; */
+    width: 185px;
+    transform-origin: top left;
+    transform: rotate(90deg);
+    margin-left: calc(100% + 28px);
 }
 
 .ship-lineup li {
@@ -240,6 +261,7 @@ main {
     opacity: 0.4;
     height: 37px;
     cursor: pointer;
+    padding-top: 2px;
 }
 
 .ship-lineup li:hover {
