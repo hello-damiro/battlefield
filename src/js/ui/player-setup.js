@@ -108,7 +108,7 @@ export const playerSetUp = (ships) => {
     }
 
     renderDockedShips();
-    hideListItem(1);
+    // hideListItem(1);
     rotateShip();
     selectShip(shipIndex);
     positionShip();

@@ -255,17 +255,16 @@ main {
     margin-top: 12px;
     display: flex;
     flex-direction: column;
-    /* background: red; */
 }
 
 .ship-lineup li {
     transform: rotate(180deg);
-    margin-top: 12px;
     opacity: 0.4;
     height: 37px;
     cursor: pointer;
-    padding-top: 2px;
+    margin-bottom: 8px;
     align-self: end;
+    /* background: #ffffff22; */
 }
 
 .ship-lineup li:hover {
