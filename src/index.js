@@ -1,31 +1,26 @@
 import './styles/style.css';
 import { $, _$ } from './js/helpers';
 import { ships } from './js/constants';
-import { Ship } from './js/ship';
-import { createMap } from './js/ui/create-map';
-import { playerSetUp } from './js/ui/player-setup';
+import { CreateMap } from './js/ui/create-map';
+import { SetupGame } from './js/ui/setup-game';
+import { PlayGame } from './js/ui/play-game';
 import { events } from './js/pubsub';
 
 const grid = 10;
-const map = $('.main-map');
+const mainMap = $('.main-map');
 const miniMap = $('.monitor-map');
 
-const enemyMap = createMap(map, grid, false);
-const playerMap = createMap(miniMap, grid, true);
-playerSetUp(ships);
+const enemyMap = CreateMap(mainMap, grid, false);
+const playerMap = CreateMap(miniMap, grid, true);
 
-events.on('disableMap', disableMap);
-function disableMap(disable) {
-    if (disable) playerMap.disableCells();
-}
+const setup = SetupGame(miniMap, ships);
+const game = PlayGame(mainMap);
 
-events.on('cell-XY', printCellCoordinates);
-function printCellCoordinates(xyCoord) {
-    console.log('cell: ' + xyCoord.x + ', ' + xyCoord.y);
-}
+const disableMap = (disable) => (disable ? playerMap.disableCells() : '');
+events.on('disable-map', disableMap);
 
+const printH3Text = (text) => ($('.configure-ship h3').textContent = text);
 events.on('text-h3', printH3Text);
-function printH3Text(text) {
-    const textH3 = $('.configure-ship h3');
-    textH3.textContent = text;
-}
+
+const printCellCoords = (xyCoord) => console.log('attacked cell: ' + xyCoord.x + ', ' + xyCoord.y);
+events.on('cell-XY', printCellCoords);

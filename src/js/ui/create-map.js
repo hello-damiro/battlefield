@@ -1,4 +1,4 @@
-export const createMap = (div, length, monitor) => {
+export const CreateMap = (div, length, monitor) => {
     createColumn(div);
     function createColumn(parent) {
         const column = document.createElement('div');
@@ -30,7 +30,10 @@ export const createMap = (div, length, monitor) => {
 
     function disableCells() {
         const cells = div.querySelectorAll('.cell');
-        cells.forEach((cell) => cell.classList.add('no-click'));
+        cells.forEach((cell) => {
+            cell.classList.add('no-click');
+            cell.style.backgroundColor = '#ffffff00';
+        });
     }
 
     return {

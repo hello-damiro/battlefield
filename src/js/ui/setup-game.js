@@ -1,7 +1,7 @@
 import { $, _$ } from '../helpers';
 import { events } from '../pubsub';
 
-export const playerSetUp = (ships) => {
+export const SetupGame = (map, ships) => {
     let shipIndex = 0;
     let shipsInPlace = 0;
     let ship = ships[shipIndex];
@@ -11,9 +11,9 @@ export const playerSetUp = (ships) => {
 
     const startButton = $('.start');
     startButton.addEventListener('click', () => {
-        events.emit('text-h3', "Light 'em up!");
         $('.screen').classList.toggle('hidden');
         startButton.classList.add('hidden');
+        events.emit('text-h3', "Light 'em up!");
     });
 
     function listShips() {
@@ -53,7 +53,6 @@ export const playerSetUp = (ships) => {
         shipIndex = 0;
         listDockedShips();
         selectShip(shipIndex);
-        console.log(dockedShips);
     }
 
     function hideListItem(index) {
@@ -74,7 +73,7 @@ export const playerSetUp = (ships) => {
     }
 
     function positionShip() {
-        const cells = _$('.monitor-map .cell');
+        const cells = map.querySelectorAll('.cell');
         cells.forEach((cell, index) => {
             let isPermanent = false;
             const nucleus = cell.querySelector('.nucleus');
@@ -109,10 +108,9 @@ export const playerSetUp = (ships) => {
         selectedShip.y = cell.getAttribute('data-y');
         cell.classList.add('no-click');
         shipsInPlace++;
-        events.emit('cell-XY', selectedShip);
         deleteFromList(shipIndex);
         if (shipsInPlace === ships.length || dockedShips.length === 0) gameReady();
-        console.log(shipIndex);
+        // events.emit('cell-XY', selectedShip);
     }
 
     function gameReady() {
@@ -120,7 +118,7 @@ export const playerSetUp = (ships) => {
         $('.ship-lineup').classList.toggle('hidden');
         startButton.classList.remove('hidden');
         events.emit('text-h3', 'Engage enemy!');
-        events.emit('disableMap', true);
+        events.emit('disable-map', true);
     }
 
     listShips();
