@@ -10,6 +10,8 @@ LIVE SITE [HERE](https://hello-damiro.github.io/battlefield)
 
 **Day 2:** Coded CSS/JS UI functionalties. Modularized UI factory functions. Struggle in Implementing PubSub.
 
+**Day 3:** Refactored some functions. Needs to learn how to create proper classes that can easily be integrated to othher functions not just by using pubsub. On the other hand, I feel Im having a great progress.
+
 </br>
 
 Some nice [warships](https://www.shutterstock.com/g/Konstantin+Petrov/sets/178552838)
