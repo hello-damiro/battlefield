@@ -244,24 +244,28 @@ main {
 }
 
 .ship-lineup {
-    /* background: red; */
     height: 220px;
 }
 
 .ship-lineup ul {
-    /* background: blue; */
     width: 185px;
-    transform-origin: top left;
-    transform: rotate(90deg);
-    margin-left: calc(100% + 28px);
+    transform-origin: top right;
+    transform: rotate(-90deg);
+    margin-left: calc(-100% + 32px);
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    /* background: red; */
 }
 
 .ship-lineup li {
+    transform: rotate(180deg);
     margin-top: 12px;
     opacity: 0.4;
     height: 37px;
     cursor: pointer;
     padding-top: 2px;
+    align-self: end;
 }
 
 .ship-lineup li:hover {

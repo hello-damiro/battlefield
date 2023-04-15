@@ -7,6 +7,7 @@ export const playerSetUp = (ships) => {
     let ship = ships[shipIndex];
     let isRotated = false;
     let selectedShip = { x: 0, y: 0 };
+    let dockedShipList = [];
 
     const startButton = $('.start');
     startButton.addEventListener('click', () => {
@@ -26,12 +27,17 @@ export const playerSetUp = (ships) => {
     }
 
     function listShips() {
+        ships.forEach((ship) => dockedShipList.push(ship.type));
+    }
+
+    function renderDockedShips() {
+        listShips();
         const ul = $('.ship-lineup ul');
-        ships.forEach((ship, index) => {
+        dockedShipList.forEach((ship, index) => {
             const li = document.createElement('li');
-            li.classList.add(ship.type);
-            ul.appendChild(li);
+            li.classList.add(dockedShipList[index]);
             li.addEventListener('click', () => selectShip(index));
+            ul.appendChild(li);
         });
     }
 
@@ -44,6 +50,13 @@ export const playerSetUp = (ships) => {
         const textH4 = $('.dock-name > h4');
         textH4.textContent = ship.type;
         // console.log(index + ': ' + isRotated + ' ' + ship.type);
+    }
+
+    function hideListItem(index) {
+        const items = _$('.ship-lineup ul li');
+        items.forEach((item, i) => {
+            if (i == index) item.classList.add('hidden');
+        });
     }
 
     function rotateShip() {
@@ -94,8 +107,9 @@ export const playerSetUp = (ships) => {
         events.emit('cell-XY', selectedShip);
     }
 
+    renderDockedShips();
+    hideListItem(1);
     rotateShip();
-    listShips();
     selectShip(shipIndex);
     positionShip();
 };
