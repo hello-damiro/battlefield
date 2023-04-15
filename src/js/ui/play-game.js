@@ -1,6 +1,6 @@
 import { $, _$ } from '../helpers';
 import { events } from '../pubsub';
-import { randomBool } from '../helpers'
+import { randomBool } from '../helpers';
 
 export const PlayGame = (map) => {
     function enableCell() {

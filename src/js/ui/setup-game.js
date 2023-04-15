@@ -1,13 +1,15 @@
 import { $, _$ } from '../helpers';
 import { events } from '../pubsub';
+import { grid } from '../..';
 
 export const SetupGame = (map, ships) => {
     let shipIndex = 0;
     let shipsInPlace = 0;
     let ship = ships[shipIndex];
-    let isRotated = false;
+    let isVertical = false;
     let selectedShip = { x: 0, y: 0 };
     let dockedShips = [];
+    let occupiedCells = [];
 
     const startButton = $('.start');
     startButton.addEventListener('click', () => {
@@ -17,7 +19,7 @@ export const SetupGame = (map, ships) => {
     });
 
     function listShips() {
-        ships.forEach((ship) => dockedShips.push(ship.type));
+        ships.forEach((ship) => dockedShips.push(ship));
     }
 
     function listDockedShips() {
@@ -25,7 +27,7 @@ export const SetupGame = (map, ships) => {
         ul.innerHTML = '';
         dockedShips.forEach((ship, index) => {
             const li = document.createElement('li');
-            li.classList.add(dockedShips[index]);
+            li.classList.add(dockedShips[index].type);
             li.addEventListener('click', () => selectShip(index));
             ul.appendChild(li);
         });
@@ -36,13 +38,14 @@ export const SetupGame = (map, ships) => {
         ship = dockedShips[index];
         const shipOnDock = $('.ship > div');
         shipOnDock.setAttribute('class', '');
-        shipOnDock.classList.add(dockedShips[index]);
+        shipOnDock.classList.add(dockedShips[shipIndex].type);
         const textH4 = $('.dock-name > h4');
-        textH4.textContent = dockedShips[index];
+        textH4.textContent = dockedShips[index].type;
         hideListItem(index);
     }
 
     function deleteFromList(index) {
+        shipIndex = 0;
         const items = _$('.ship-lineup ul li');
         items.forEach((item, i) => {
             if (i == index) {
@@ -50,9 +53,10 @@ export const SetupGame = (map, ships) => {
                 dockedShips.splice(index, 1);
             }
         });
-        shipIndex = 0;
-        listDockedShips();
-        selectShip(shipIndex);
+        if (dockedShips.length != 0) {
+            selectShip(shipIndex);
+            listDockedShips();
+        }
     }
 
     function hideListItem(index) {
@@ -68,7 +72,7 @@ export const SetupGame = (map, ships) => {
         const rotateButton = $('.rotate');
         rotateButton.addEventListener('click', () => {
             ship.classList.toggle('config-vertical');
-            isRotated = !isRotated;
+            isVertical = !isVertical;
         });
     }
 
@@ -77,18 +81,86 @@ export const SetupGame = (map, ships) => {
         cells.forEach((cell, index) => {
             let isPermanent = false;
             const nucleus = cell.querySelector('.nucleus');
+            const x = cell.getAttribute('data-x');
+            const y = cell.getAttribute('data-y');
             cell.addEventListener('click', () => {
                 isPermanent = true;
-                hoverNucleusHandler(nucleus, dockedShips[shipIndex], true, isRotated, isPermanent);
-                clickCellHandler(cell);
+                const type = dockedShips[shipIndex].type;
+                const length = dockedShips[shipIndex].length;
+                if (isAllowed(x, y, length, isVertical)) {
+                    hoverNucleusHandler(nucleus, type, true, isVertical, isPermanent);
+                    clickCellHandler(cell);
+                    reserveCells(x, y, length, isVertical);
+                }
             });
-            cell.addEventListener('mouseover', () =>
-                hoverNucleusHandler(nucleus, dockedShips[shipIndex], true, isRotated, isPermanent)
-            );
-            cell.addEventListener('mouseout', () =>
-                hoverNucleusHandler(nucleus, dockedShips[shipIndex], false, isRotated, isPermanent)
-            );
+            cell.addEventListener('mouseover', () => {
+                const type = dockedShips[shipIndex].type;
+                const length = dockedShips[shipIndex].length;
+                if (isAllowed(x, y, length, isVertical))
+                    hoverNucleusHandler(nucleus, type, true, isVertical, isPermanent);
+                else highlightInvalid(x, y, isVertical, true);
+            });
+            cell.addEventListener('mouseout', () => {
+                const type = dockedShips[shipIndex].type;
+                const length = dockedShips[shipIndex].length;
+                if (isAllowed(x, y, length, isVertical))
+                    hoverNucleusHandler(nucleus, type, false, isVertical, isPermanent);
+                else highlightInvalid(x, y, isVertical, false);
+            });
         });
+    }
+
+    function isAllowed(x, y, length, vertical) {
+        const xInt = parseInt(x) + length - 1;
+        const yInt = parseInt(y) + length - 1;
+        let isAllowed = false;
+        if (vertical) isAllowed = grid >= yInt ? true : false;
+        else isAllowed = grid >= xInt ? true : false;
+        return isAllowed;
+    }
+
+    function reserveCells(x, y, length, vertical) {
+        let xInt = parseInt(x);
+        let yInt = parseInt(y);
+        let xLength = xInt + length - 1;
+        let yLength = yInt + length - 1;
+        let cell = '';
+        if (vertical) {
+            for (let index = y - 1; index < yLength; index++) {
+                console.log(index + ': ' + xInt + ' - ' + length);
+                const selector = 'div.cell[data-x="' + xInt + '"][data-y="' + (index + 1) + '"]';
+                cell = map.querySelector(selector);
+                cell.classList.add('miss', 'no-click');
+            }
+        } else {
+            for (let index = x - 1; index < xLength; index++) {
+                console.log(index + ': ' + xInt + ' - ' + length);
+                const selector = 'div.cell[data-x="' + (index + 1) + '"][data-y="' + yInt + '"]';
+                cell = map.querySelector(selector);
+                cell.classList.add('miss', 'no-click');
+            }
+        }
+    }
+
+    function highlightInvalid(x, y, vertical, over) {
+        let xInt = parseInt(x);
+        let yInt = parseInt(y);
+        let cell = '';
+        if (vertical) {
+            for (let index = y - 1; index < grid; index++) {
+                const selector = 'div.cell[data-x="' + xInt + '"][data-y="' + (index + 1) + '"]';
+                cell = map.querySelector(selector);
+                if (over) cell.classList.add('hit');
+                else cell.classList.remove('hit');
+            }
+        } else {
+            for (let index = x - 1; index < grid; index++) {
+                const selector = 'div.cell[data-x="' + (index + 1) + '"][data-y="' + yInt + '"]';
+                cell = map.querySelector(selector);
+                if (over) cell.classList.add('hit');
+                else cell.classList.remove('hit');
+            }
+        }
     }
 
     function hoverNucleusHandler(nucleus, type, over, rotated, permanent) {
@@ -108,8 +180,8 @@ export const SetupGame = (map, ships) => {
         selectedShip.y = cell.getAttribute('data-y');
         cell.classList.add('no-click');
         shipsInPlace++;
-        deleteFromList(shipIndex);
-        if (shipsInPlace === ships.length || dockedShips.length === 0) gameReady();
+        if (shipsInPlace == ships.length) gameReady();
+        else deleteFromList(shipIndex);
         // events.emit('cell-XY', selectedShip);
     }
 

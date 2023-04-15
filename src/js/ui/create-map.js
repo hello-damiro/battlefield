@@ -4,7 +4,7 @@ export const CreateMap = (div, length, monitor) => {
         const column = document.createElement('div');
         column.classList.add('column');
         parent.appendChild(column);
-        for (let index = 0; index < length; index++) createRowCells(column, index);
+        for (let index = 0; index < length; index++) createRowCells(column, index + 1);
         monitor ? column.classList.add('border-blue') : column.classList.add('border-red');
     }
 
@@ -13,7 +13,7 @@ export const CreateMap = (div, length, monitor) => {
         rowCells.classList.add('row');
         parent.appendChild(rowCells);
         for (let index = 0; index < length; index++) {
-            createCell(rowCells, index, y);
+            createCell(rowCells, index + 1, y);
         }
     }
 

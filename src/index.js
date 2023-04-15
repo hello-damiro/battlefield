@@ -6,7 +6,7 @@ import { SetupGame } from './js/ui/setup-game';
 import { PlayGame } from './js/ui/play-game';
 import { events } from './js/pubsub';
 
-const grid = 10;
+export const grid = 10;
 const mainMap = $('.main-map');
 const miniMap = $('.monitor-map');
 
