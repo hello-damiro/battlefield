@@ -35,51 +35,60 @@ export const AISetup = (map, ships) => {
         return false;
     }
 
+    function isBounded(x, y, length, vertical) {
+        const xInt = parseInt(x) + length - 1;
+        const yInt = parseInt(y) + length - 1;
+        const limit = vertical ? yInt : xInt;
+        if (limit <= grid) return true;
+        return false;
+    }
+
     function placeShips() {
         let occupiedByShip = [];
         ships.forEach((ship, index) => {
-            let xInt = 0;
-            let yInt = 0;
+            let x = 0;
+            let y = 0;
             let isVertical = false;
+
             const positionShip = () => {
-                occupiedByShip = [];
                 const coords = getRandomCell();
-                xInt = coords.x;
-                yInt = coords.y;
+                occupiedByShip = [];
+                x = coords.x;
+                y = coords.y;
                 isVertical = coords.vertical;
-                const xLength = xInt + ship.length - 1;
-                const yLength = yInt + ship.length - 1;
+                const xLength = x + ship.length - 1;
+                const yLength = y + ship.length - 1;
                 const xLimit = Math.min(grid, xLength);
                 const yLimit = Math.min(grid, yLength);
 
                 for (let i = 0; i < ship.length; i++) {
-                    const row = isVertical ? xInt : xInt + i;
-                    const col = isVertical ? yInt + i : yInt;
+                    const row = isVertical ? x : x + i;
+                    const col = isVertical ? y + i : y;
                     if (row <= xLimit && col <= yLimit) {
                         // console.log('XY: ' + row + ', ' + col);
                         occupiedByShip.push([row, col]);
                     }
                 }
-                // console.log('SHIP: ' + occupiedByShip);
             };
 
             positionShip();
 
+            let isContained = isBounded(x, y, ship.length, isVertical);
             let isOverlap = hasOverlap(occupiedByShip);
-            console.log(index + ' OVERLAP: ' + isOverlap);
-            while (isOverlap) {
+            while (isOverlap || !isContained) {
+                console.log(index + ' OVERLAP: ' + isOverlap + '/' + isContained);
                 positionShip();
                 isOverlap = hasOverlap(occupiedByShip);
+                isContained = isBounded(x, y, ship.length, isVertical);
             }
 
-            const selector = getSelectorCoordinates(xInt, yInt);
+            const selector = getSelectorCoordinates(x, y);
             const cell = map.querySelector(selector);
             const nucleus = cell.querySelector('.nucleus');
             nucleus.classList.add(ship.type);
             if (isVertical) nucleus.classList.add('vertical');
 
             occupiedByFleet.push([...occupiedByShip]);
-            // console.log('FLEET: ' + occupiedByFleet);
         });
     }
 
