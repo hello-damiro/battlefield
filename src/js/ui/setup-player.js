@@ -123,6 +123,7 @@ export const PlayerSetup = (map, ships) => {
                 occupyCell(selector);
             }
         }
+        events.emit('player-cells', occupiedByFleet);
     }
 
     function getShipCells(x, y, length, vertical) {

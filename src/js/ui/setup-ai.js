@@ -76,7 +76,7 @@ export const AISetup = (map, ships) => {
             let isContained = isBounded(x, y, ship.length, isVertical);
             let isOverlap = hasOverlap(occupiedByShip);
             while (isOverlap || !isContained) {
-                console.log(index + ' OVERLAP: ' + isOverlap + '/' + isContained);
+                // console.log(index + ' OVERLAP: ' + isOverlap + '/' + isContained);
                 positionShip();
                 isOverlap = hasOverlap(occupiedByShip);
                 isContained = isBounded(x, y, ship.length, isVertical);
@@ -87,8 +87,9 @@ export const AISetup = (map, ships) => {
             const nucleus = cell.querySelector('.nucleus');
             nucleus.classList.add(ship.type);
             if (isVertical) nucleus.classList.add('vertical');
-
             occupiedByFleet.push([...occupiedByShip]);
+
+            events.emit('ai-cells', occupiedByFleet);
         });
     }
 
@@ -97,5 +98,6 @@ export const AISetup = (map, ships) => {
 
     return {
         placeShips: placeShips,
+        occupiedByFleet: occupiedByFleet,
     };
 };
