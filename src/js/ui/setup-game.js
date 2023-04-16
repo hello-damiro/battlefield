@@ -12,13 +12,6 @@ export const SetupGame = (map, ships) => {
     let occupiedCells = [];
     let occupiedByShip = [];
 
-    const startButton = $('.start');
-    startButton.addEventListener('click', () => {
-        $('.screen').classList.toggle('hidden');
-        startButton.classList.add('hidden');
-        events.emit('text-h3', "Light 'em up!");
-    });
-
     function listShips() {
         ships.forEach((ship) => dockedShips.push(ship));
     }
@@ -87,12 +80,11 @@ export const SetupGame = (map, ships) => {
 
             const handleCellClick = () => {
                 isPermanent = true;
-                const { type, length } = dockedShips[shipIndex];
+                const length = dockedShips[shipIndex].length;
                 const shipCells = getShipCells(x, y, length, isVertical);
                 if (isAllowed(x, y, length, isVertical) && !hasOverlap(shipCells)) {
+                    occupyCells(x, y, length, isVertical);
                     setShipInPlace(cell);
-                    reserveCells(x, y, length, isVertical);
-                    hoverNucleus(nucleus, type, true, isVertical, isPermanent);
                 }
             };
 
@@ -117,13 +109,13 @@ export const SetupGame = (map, ships) => {
         else return `div.cell[data-x="${x}"][data-y="${y}"]`;
     };
 
-    function reserveCells(x, y, length, vertical) {
+    function occupyCells(x, y, length, vertical) {
         const xInt = parseInt(x);
         const yInt = parseInt(y);
         const xLength = xInt + length - 1;
         const yLength = yInt + length - 1;
 
-        const reserveCell = (selector) => {
+        const occupyCell = (selector) => {
             const cell = map.querySelector(selector);
             if (cell) cell.classList.add('miss', 'no-click');
         };
@@ -132,16 +124,15 @@ export const SetupGame = (map, ships) => {
             for (let index = yInt; index <= yLength; index++) {
                 const selector = getSelectorCoordinates(xInt, index);
                 occupiedCells.push([xInt, index]);
-                reserveCell(selector);
+                occupyCell(selector);
             }
         } else {
             for (let index = xInt; index <= xLength; index++) {
                 const selector = getSelectorCoordinates(index, yInt);
                 occupiedCells.push([index, yInt]);
-                reserveCell(selector);
+                occupyCell(selector);
             }
         }
-        console.log(occupiedCells);
     }
 
     function getShipCells(x, y, length, vertical) {
@@ -177,7 +168,6 @@ export const SetupGame = (map, ships) => {
         const xInt = parseInt(x) + length - 1;
         const yInt = parseInt(y) + length - 1;
         const limit = vertical ? yInt : xInt;
-        console.log();
         return limit <= grid;
     }
 
@@ -241,6 +231,13 @@ export const SetupGame = (map, ships) => {
         events.emit('text-h3', 'Engage enemy!');
         events.emit('disable-map', true);
     }
+
+    const startButton = $('.start');
+    startButton.addEventListener('click', () => {
+        $('.screen').classList.toggle('hidden');
+        startButton.classList.add('hidden');
+        events.emit('text-h3', "Light 'em up!");
+    });
 
     listShips();
     listDockedShips();
