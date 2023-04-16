@@ -84,6 +84,7 @@ h3 {
     font-size: 1.6rem;
     font-weight: 100;
     line-height: 1.4rem;
+    margin-bottom: 12px;
 }
 
 em {
@@ -185,6 +186,10 @@ main {
     flex-direction: column;
     gap: 24px;
     justify-content: space-between;
+}
+
+.configure-ship > .words {
+    max-width: 260px;
 }
 
 .dock-group {

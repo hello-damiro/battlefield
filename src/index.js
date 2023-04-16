@@ -22,5 +22,8 @@ events.on('disable-map', disableMap);
 const printH3Text = (text) => ($('.configure-ship h3').textContent = text);
 events.on('text-h3', printH3Text);
 
+const printH4Text = (text) => ($('.configure-ship h4').textContent = text);
+events.on('text-h4', printH4Text);
+
 const printCellCoords = (xyCoord) => console.log('attacked cell: ' + xyCoord.x + ', ' + xyCoord.y);
 events.on('cell-XY', printCellCoords);
