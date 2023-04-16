@@ -35,7 +35,6 @@ export const SetupGame = (map, ships) => {
         shipOnDock.classList.add(dockedShips[shipIndex].type);
         const textH4 = $('.dock-name > h4');
         textH4.textContent = dockedShips[index].type;
-        hideListItem(index);
     }
 
     function deleteFromList(index) {
@@ -51,14 +50,6 @@ export const SetupGame = (map, ships) => {
             selectShip(shipIndex);
             listDockedShips();
         }
-    }
-
-    function hideListItem(index) {
-        const items = _$('.ship-lineup ul li');
-        items.forEach((item, i) => {
-            item.classList.remove('hidden');
-            if (i == index) item.classList.add('hidden');
-        });
     }
 
     function rotateShip() {
@@ -240,8 +231,8 @@ export const SetupGame = (map, ships) => {
     });
 
     listShips();
+    selectShip(shipIndex);
     listDockedShips();
     rotateShip();
-    selectShip(shipIndex);
     positionShip();
 };
