@@ -128,20 +128,17 @@ h4 {
 
 .cell:hover {
     background: url('../assets/images/pointer.svg') no-repeat center center;
-    background-color: #ffffff06;
     background-size: 100%;
 }
 
 .hit {
-    opacity: 0.2;
-    background: var(--royal-red);
+    background-color: #ff323233;
 }
 
 .empty,
 .miss {
     background-color: #ffffff00;
-    /* opacity: 0;
-    background: var(--royal-blue); */
+    /* background-color: #1e4db133; */
 }
 
 main {

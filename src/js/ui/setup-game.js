@@ -108,7 +108,7 @@ export const SetupGame = (map, ships) => {
 
         const occupyCell = (selector) => {
             const cell = map.querySelector(selector);
-            if (cell) cell.classList.add('miss', 'no-click');
+            if (cell) cell.classList.add('no-click');
         };
 
         if (vertical) {
