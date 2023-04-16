@@ -127,7 +127,7 @@ h4 {
 }
 
 .cell:hover {
-    background: url('../assets/images/pointer.svg') no-repeat center center;
+    background: url('../assets/images/pointer.svg') #ffffff06 no-repeat center center;
     background-size: 100%;
 }
 
