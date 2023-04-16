@@ -1,3 +1,5 @@
+export const grid = 10;
+
 export const ships = [
     { type: 'carrier', length: 5 },
     { type: 'battleship', length: 4 },

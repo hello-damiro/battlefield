@@ -1,6 +1,6 @@
 import { $, _$ } from '../helpers';
 import { events } from '../pubsub';
-import { grid } from '../..';
+import { grid } from '../constants';
 
 export const PlayerSetup = (map, ships) => {
     let shipIndex = 0;

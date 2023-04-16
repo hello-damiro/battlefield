@@ -1,6 +1,6 @@
 import { $, _$, getRandomBetween, getRandomBool } from '../helpers';
 import { events } from '../pubsub';
-import { grid } from '../..';
+import { grid } from '../constants';
 
 export const AISetup = (map, ships) => {
     let dockedShips = [];
@@ -93,6 +93,7 @@ export const AISetup = (map, ships) => {
     }
 
     listShips();
+    placeShips();
 
     return {
         placeShips: placeShips,
