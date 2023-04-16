@@ -9,8 +9,7 @@ export const PlayerSetup = (map, ships) => {
     let isVertical = false;
     let selectedShip = { x: 0, y: 0 };
     let dockedShips = [];
-    let occupiedCells = [];
-    // let occupiedByShip = [];
+    let occupiedByFleet = [];
 
     function listShips() {
         ships.forEach((ship) => dockedShips.push(ship));
@@ -96,8 +95,8 @@ export const PlayerSetup = (map, ships) => {
     }
 
     const getSelectorCoordinates = (x, y) => {
-        if (isVertical) return 'div.cell[data-x="${x}"][data-y="${y}"]';
-        else return 'div.cell[data-x="${x}"][data-y="${y}"]';
+        if (isVertical) return `div.cell[data-x="${x}"][data-y="${y}"]`;
+        else return `div.cell[data-x="${x}"][data-y="${y}"]`;
     };
 
     function occupyCells(x, y, length, vertical) {
@@ -114,20 +113,20 @@ export const PlayerSetup = (map, ships) => {
         if (vertical) {
             for (let index = yInt; index <= yLength; index++) {
                 const selector = getSelectorCoordinates(xInt, index);
-                occupiedCells.push([xInt, index]);
+                occupiedByFleet.push([xInt, index]);
                 occupyCell(selector);
             }
         } else {
             for (let index = xInt; index <= xLength; index++) {
                 const selector = getSelectorCoordinates(index, yInt);
-                occupiedCells.push([index, yInt]);
+                occupiedByFleet.push([index, yInt]);
                 occupyCell(selector);
             }
         }
     }
 
     function getShipCells(x, y, length, vertical) {
-        occupiedByShip = [];
+        const occupiedByShip = [];
         const grid = 10;
         const xInt = parseInt(x);
         const yInt = parseInt(y);
@@ -149,7 +148,7 @@ export const PlayerSetup = (map, ships) => {
         let isOverlap = false;
         for (let i = 0; i < ship.length; i++) {
             const [x, y] = ship[i];
-            isOverlap = occupiedCells.some((cell) => cell[0] === x && cell[1] === y);
+            isOverlap = occupiedByFleet.some((cell) => cell[0] === x && cell[1] === y);
             if (isOverlap) return true;
         }
         return isOverlap;
