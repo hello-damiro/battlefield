@@ -69,10 +69,10 @@ export const SetupGame = (map, ships) => {
     }
 
     function rotateShip() {
-        ship = $('.dock > .ship');
+        const shipOnDock = $('.dock > .ship');
         const rotateButton = $('.rotate');
         rotateButton.addEventListener('click', () => {
-            ship.classList.toggle('config-vertical');
+            shipOnDock.classList.toggle('config-vertical');
             isVertical = !isVertical;
         });
     }
@@ -211,6 +211,7 @@ export const SetupGame = (map, ships) => {
     }
 
     function hoverNucleus(nucleus, type, over, rotated, permanent) {
+        nucleus.setAttribute('class', ''); // to clear a render bug
         if (over) {
             nucleus.classList.add(type);
             if (rotated) nucleus.classList.add('vertical');
