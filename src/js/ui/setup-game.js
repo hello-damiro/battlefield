@@ -69,7 +69,7 @@ export const SetupGame = (map, ships) => {
     }
 
     function rotateShip() {
-        const ship = $('.dock > .ship');
+        ship = $('.dock > .ship');
         const rotateButton = $('.rotate');
         rotateButton.addEventListener('click', () => {
             ship.classList.toggle('config-vertical');
@@ -79,7 +79,7 @@ export const SetupGame = (map, ships) => {
 
     function positionShip() {
         const cells = map.querySelectorAll('.cell');
-        cells.forEach((cell, index) => {
+        cells.forEach((cell) => {
             let isPermanent = false;
             const x = cell.getAttribute('data-x');
             const y = cell.getAttribute('data-y');
@@ -88,26 +88,22 @@ export const SetupGame = (map, ships) => {
             const handleCellClick = () => {
                 isPermanent = true;
                 const { type, length } = dockedShips[shipIndex];
-                if (hasOverlap(getShipCells(x, y, length, isVertical))) {
-                    highlightInvalid(x, y, isVertical, true);
-                } else {
-                    if (isAllowed(x, y, length, isVertical)) {
-                        setShipInPlace(cell);
-                        reserveCells(x, y, length, isVertical);
-                        hoverNucleus(nucleus, type, true, isVertical, isPermanent);
-                    }
+                const shipCells = getShipCells(x, y, length, isVertical);
+                if (isAllowed(x, y, length, isVertical) && !hasOverlap(shipCells)) {
+                    setShipInPlace(cell);
+                    reserveCells(x, y, length, isVertical);
+                    hoverNucleus(nucleus, type, true, isVertical, isPermanent);
                 }
             };
 
             const handleCellHover = (isOver) => {
                 const { type, length } = dockedShips[shipIndex];
-                if (hasOverlap(getShipCells(x, y, length, isVertical))) {
-                    highlightInvalid(x, y, isVertical, isOver);
-                } else {
-                    if (isAllowed(x, y, length, isVertical))
-                        hoverNucleus(nucleus, type, isOver, isVertical, isPermanent);
-                    else highlightInvalid(x, y, isVertical, isOver);
-                }
+                const shipCells = getShipCells(x, y, length, isVertical);
+                const isOverlap = hasOverlap(shipCells);
+                const isValid = isAllowed(x, y, length, isVertical);
+                if (isOverlap) highlightInvalid(x, y, length, isVertical, isOver);
+                else if (isValid) hoverNucleus(nucleus, type, isOver, isVertical, isPermanent);
+                else highlightInvalid(x, y, length, isVertical, isOver);
             };
 
             cell.addEventListener('click', () => handleCellClick());
@@ -185,9 +181,13 @@ export const SetupGame = (map, ships) => {
         return limit <= grid;
     }
 
-    function highlightInvalid(x, y, vertical, over) {
+    function highlightInvalid(x, y, length, vertical, over) {
         const xInt = parseInt(x);
         const yInt = parseInt(y);
+        const xLength = xInt + length - 1;
+        const yLength = yInt + length - 1;
+        const xLimit = Math.min(grid, xLength);
+        const yLimit = Math.min(grid, yLength);
 
         const toggleCellHitClass = (selector, over) => {
             const cell = map.querySelector(selector);
@@ -198,12 +198,12 @@ export const SetupGame = (map, ships) => {
         };
 
         if (vertical) {
-            for (let index = yInt; index <= grid; index++) {
+            for (let index = yInt; index <= yLimit; index++) {
                 const selector = getSelectorCoordinates(xInt, index);
                 toggleCellHitClass(selector, over);
             }
         } else {
-            for (let index = xInt; index <= grid; index++) {
+            for (let index = xInt; index <= xLimit; index++) {
                 const selector = getSelectorCoordinates(index, yInt);
                 toggleCellHitClass(selector, over);
             }
