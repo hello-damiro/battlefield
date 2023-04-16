@@ -25,7 +25,7 @@ events.on('cell-XY', printCellCoords);
 
 const enemyMap = CreateMap(mainMap, grid, false);
 const playerMap = CreateMap(miniMap, grid, true);
-const game = PlayGame(mainMap);
+// const game = PlayGame(mainMap);
 
 const ai = AISetup(mainMap, ships);
 const player = PlayerSetup(miniMap, ships);
