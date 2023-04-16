@@ -1,6 +1,6 @@
 import { $, _$ } from '../helpers';
 import { events } from '../pubsub';
-import { randomBool } from '../helpers';
+import { getRandomBool } from '../helpers';
 
 export const PlayGame = (map) => {
     function enableCell() {
@@ -8,7 +8,7 @@ export const PlayGame = (map) => {
         cells.forEach((cell, index) => {
             const x = cell.getAttribute('data-x');
             const y = cell.getAttribute('data-y');
-            cell.addEventListener('click', () => attackEnamy(x, y, randomBool()));
+            cell.addEventListener('click', () => attackEnamy(x, y, getRandomBool()));
         });
     }
 

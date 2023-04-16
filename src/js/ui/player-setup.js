@@ -2,7 +2,7 @@ import { $, _$ } from '../helpers';
 import { events } from '../pubsub';
 import { grid } from '../..';
 
-export const SetupGame = (map, ships) => {
+export const PlayerSetup = (map, ships) => {
     let shipIndex = 0;
     let shipsInPlace = 0;
     let ship = ships[shipIndex];
