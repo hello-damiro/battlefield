@@ -133,6 +133,7 @@ h4 {
 
 .hit {
     background-color: #ff323233;
+    cursor: default;
 }
 
 .empty,
@@ -314,6 +315,7 @@ main {
     transform: rotate(90deg);
     transform-origin: top left;
     margin-left: 100%;
+    pointer-events: none;
 }
 
 .nucleus,
