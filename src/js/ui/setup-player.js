@@ -10,7 +10,7 @@ export const PlayerSetup = (map, ships) => {
     let selectedShip = { x: 0, y: 0 };
     let dockedShips = [];
     let occupiedCells = [];
-    let occupiedByShip = [];
+    // let occupiedByShip = [];
 
     function listShips() {
         ships.forEach((ship) => dockedShips.push(ship));
@@ -96,8 +96,8 @@ export const PlayerSetup = (map, ships) => {
     }
 
     const getSelectorCoordinates = (x, y) => {
-        if (isVertical) return `div.cell[data-x="${x}"][data-y="${y}"]`;
-        else return `div.cell[data-x="${x}"][data-y="${y}"]`;
+        if (isVertical) return 'div.cell[data-x="${x}"][data-y="${y}"]';
+        else return 'div.cell[data-x="${x}"][data-y="${y}"]';
     };
 
     function occupyCells(x, y, length, vertical) {
