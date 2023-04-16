@@ -6,11 +6,15 @@ The Odin Project - Intermediate JS project
 
 LIVE SITE [HERE](https://hello-damiro.github.io/battlefield)
 
+Game design was heavily focused on using the map for each player (AI/user) thats why I cant seem to create a logic to support my vision of the game. I ended up creating 2 different gameboards (aiMap / playerMap) on which game mechanics are designed. Though I finished the procedure of this exrcise, I ended up not using waht I started. I felt that the excercise procedure doesnt support the game logic that Im creating.
+
 **Day 1:** Created modules for player, ship, gameboard. Pending gameloop since I think UI will matter when designing it. Designed basic UI at figma.
 
-**Day 2:** Coded CSS/JS UI functionalties. Modularized UI factory functions. Struggle in Implementing PubSub.
+**Day 2:** Coded CSS/JS UI functionalties. Modularized UI factory functions. Struggle in Implementing PubSub to design a separate functions for UI and the game logic.
 
-**Day 3:** Refactored some functions. Needs to learn how to create proper classes that can easily be integrated to othher functions not just by using pubsub. On the other hand, I feel Im having a great progress.
+**Day 3:** Refactored some functions. Needs to learn how to create proper classes that can easily be integrated to othher functions not just by using pubsub. On the other hand, I feel Im having a great progress. Got a quite amount of challenge today on how to design an algorithm and refactor the code for optimization.
+
+**Day 4:** Started to medle with the gameloop, Integration of modules and factoy functions. I re-read the challenges and the whole point of this exercise is to dev heavily using TDD. 🤣
 
 </br>
 

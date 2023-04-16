@@ -1,11 +1,13 @@
 import { $, _$, getRandomBetween, getRandomBool } from '../helpers';
 import { events } from '../pubsub';
 import { grid } from '../constants';
+import { Ship } from '../ship';
 
 export const AISetup = (map, ships) => {
     let dockedShips = [];
     let selectedCell = { x: 0, y: 0 };
     let occupiedByFleet = [];
+    let navy = [];
 
     function listShips() {
         ships.forEach((ship) => dockedShips.push(ship));
@@ -43,6 +45,15 @@ export const AISetup = (map, ships) => {
         return false;
     }
 
+    function createShip(index, cells) {
+        const ship = new Ship();
+        ship.type = dockedShips[index].type;
+        ship.cells = cells;
+        navy.push(ship);
+        events.emit('ai-navy', navy);
+        // console.log(ship.type + ': ' + navy);
+    }
+
     function placeShips() {
         let occupiedByShip = [];
         ships.forEach((ship, index) => {
@@ -50,7 +61,7 @@ export const AISetup = (map, ships) => {
             let y = 0;
             let isVertical = false;
 
-            const positionShip = () => {
+            const placeShip = () => {
                 const coords = getRandomCell();
                 occupiedByShip = [];
                 x = coords.x;
@@ -71,13 +82,13 @@ export const AISetup = (map, ships) => {
                 }
             };
 
-            positionShip();
+            placeShip();
 
             let isContained = isBounded(x, y, ship.length, isVertical);
             let isOverlap = hasOverlap(occupiedByShip);
             while (isOverlap || !isContained) {
                 // console.log(index + ' OVERLAP: ' + isOverlap + '/' + isContained);
-                positionShip();
+                placeShip();
                 isOverlap = hasOverlap(occupiedByShip);
                 isContained = isBounded(x, y, ship.length, isVertical);
             }
@@ -88,8 +99,8 @@ export const AISetup = (map, ships) => {
             nucleus.classList.add(ship.type);
             if (isVertical) nucleus.classList.add('vertical');
             occupiedByFleet.push([...occupiedByShip]);
-
-            events.emit('ai-cells', occupiedByFleet);
+            createShip(index, occupiedByShip);
+            // events.emit('ai-navy', occupiedByFleet);
         });
     }
 

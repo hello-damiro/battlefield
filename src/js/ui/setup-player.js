@@ -1,6 +1,7 @@
-import { $, _$ } from '../helpers';
+import { $, _$, createInstance } from '../helpers';
 import { events } from '../pubsub';
 import { grid } from '../constants';
+import { Ship } from '../ship';
 
 export const PlayerSetup = (map, ships) => {
     let shipIndex = 0;
@@ -10,6 +11,7 @@ export const PlayerSetup = (map, ships) => {
     let selectedShip = { x: 0, y: 0 };
     let dockedShips = [];
     let occupiedByFleet = [];
+    let navy = [];
 
     function listShips() {
         ships.forEach((ship) => dockedShips.push(ship));
@@ -60,7 +62,16 @@ export const PlayerSetup = (map, ships) => {
         });
     }
 
-    function positionShip() {
+    function createShip(index, cells) {
+        const ship = new Ship();
+        ship.type = dockedShips[index].type;
+        ship.cells = cells;
+        navy.push(ship);
+        events.emit('player-navy', navy);
+        // console.log(ship.type + ': ' + navy);
+    }
+
+    function placeShip() {
         const cells = map.querySelectorAll('.cell');
         cells.forEach((cell) => {
             let isPermanent = false;
@@ -73,6 +84,7 @@ export const PlayerSetup = (map, ships) => {
                 const length = dockedShips[shipIndex].length;
                 const shipCells = getShipCells(x, y, length, isVertical);
                 if (isAllowed(x, y, length, isVertical) && !hasOverlap(shipCells)) {
+                    createShip(shipIndex, shipCells);
                     occupyCells(x, y, length, isVertical);
                     setShipInPlace(cell);
                 }
@@ -123,7 +135,6 @@ export const PlayerSetup = (map, ships) => {
                 occupyCell(selector);
             }
         }
-        events.emit('player-cells', occupiedByFleet);
     }
 
     function getShipCells(x, y, length, vertical) {
@@ -208,9 +219,7 @@ export const PlayerSetup = (map, ships) => {
         const { x, y } = cell.dataset;
         selectedShip = { ...selectedShip, x, y };
         cell.classList.add('no-click');
-
         shipsInPlace++;
-
         if (shipsInPlace === ships.length) gameReady();
         else deleteFromList(shipIndex);
     }
@@ -234,5 +243,5 @@ export const PlayerSetup = (map, ships) => {
     selectShip(shipIndex);
     listDockedShips();
     rotateShip();
-    positionShip();
+    placeShip();
 };

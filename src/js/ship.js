@@ -9,13 +9,14 @@
  * number of hits is equal
  */
 export class Ship {
-    constructor(length) {
-        this.length = length;
+    constructor(type, cells) {
+        this.type = type;
+        this.cells = cells;
         this.hits = 0;
     }
 
     isSunk() {
-        return this.hits === this.length;
+        return this.hits === this.cells.length;
     }
 
     hit() {

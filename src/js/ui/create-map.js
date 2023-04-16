@@ -32,7 +32,7 @@ export const CreateMap = (div, length, monitor) => {
         const cells = div.querySelectorAll('.cell');
         cells.forEach((cell) => {
             cell.classList.add('no-click');
-            cell.style.backgroundColor = '#ffffff00';
+            // cell.style.backgroundColor = '#ffffff00';
         });
     }
 
