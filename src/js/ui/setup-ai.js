@@ -18,8 +18,8 @@ export const AISetup = (map, ships) => {
     };
 
     function getRandomCell() {
-        const randomX = getRandomBetween(1, 10);
-        const randomY = getRandomBetween(1, 10);
+        const randomX = getRandomBetween(1, grid);
+        const randomY = getRandomBetween(1, grid);
         const isVertical = getRandomBool();
         return { x: randomX, y: randomY, vertical: isVertical };
     }

@@ -12,7 +12,7 @@ export function getRandomBetween(min, max) {
 
 // Random number from 1 to a number
 export function getRandomTo(num) {
-    return getRandomBetween(1, num);
+    return Math.floor(Math.random() * num);
 }
 
 // Random boolean true or false

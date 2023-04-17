@@ -15,9 +15,6 @@ export const PlayGame = (map) => {
     function attacked(x, y, isHit) {
         const cell = map.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
         cell.classList.add('no-click');
-
-        console.log(isHit);
-
         if (isHit == true) cell.classList.add('hit');
         else cell.classList.add('miss');
     }

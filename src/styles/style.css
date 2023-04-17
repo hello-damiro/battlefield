@@ -83,7 +83,7 @@ h3 {
     color: var(--yellow);
     font-size: 1.6rem;
     font-weight: 100;
-    line-height: 1.4rem;
+    line-height: 2rem;
     margin-bottom: 12px;
 }
 
@@ -133,7 +133,7 @@ h4 {
 }
 
 .hit {
-    background-color: #ff323233;
+    background-color: #ff323266;
     cursor: default;
 }
 
