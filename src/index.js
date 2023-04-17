@@ -10,7 +10,7 @@ import { PlayGame } from './js/ui/play-game';
 import { events } from './js/pubsub';
 
 let odinToggle = true;
-const delay = 800;
+const delay = 100;
 
 let aiNavy = [];
 let playerNavy = [];
@@ -40,29 +40,39 @@ player.enableCells();
 
 $('.odin').addEventListener('click', () => toggleShowShips(aiSetup));
 
-function checkDamage(index) {
-    const navyShip = aiNavy[index];
+function checkDamage(index, navy, isPlayer) {
+    const navyShip = navy[index];
     navyShip.hit();
     if (navyShip.isSunk()) {
-        printH3Text('Their ' + navyShip.type + ' has sunk!');
-        printEmText('Good job Admiral!');
+        if (isPlayer) {
+            printH3Text('Their ' + navyShip.type + ' has sunk!');
+            printEmText('Good job Admiral!');
+        } else {
+            printH3Text('Our ' + navyShip.type + ' has sunk!');
+            printEmText('I think that hurts.');
+        }
     }
 }
 
-function checkFleetSunk(navy) {
+function checkFleetSunk(navy, isPlayer) {
     disableUI(false);
     let sunkShips = 0;
     navy.forEach((ship) => {
         if (ship.isSunk()) sunkShips++;
     });
-    if (sunkShips == navy.length) gameEnded();
+    if (sunkShips == navy.length) gameEnded(isPlayer);
 }
 
-async function gameEnded() {
+async function gameEnded(isPlayer) {
     disableUI(true);
     await getTimer(delay * 3);
-    printH3Text('You won!');
-    printEmText('Nice work Admiral! Now go back and study the code.');
+    if (isPlayer) {
+        printH3Text('You won!');
+        printEmText('Nice work Admiral! Now go back and study the code.');
+    } else {
+        printH3Text('You lose!');
+        printEmText('You better go back studyin code instead.');
+    }
     odinToggle = false;
     toggleShowShips(aiSetup);
 }
@@ -82,9 +92,9 @@ async function attack(coords) {
     player.attacked(coords.x, coords.y, isHit);
     if (hitIndex != null) {
         printH3Text('Nice shot!');
-        checkDamage(hitIndex);
+        checkDamage(hitIndex, aiNavy, true);
         await getTimer(delay);
-        checkFleetSunk(aiNavy);
+        checkFleetSunk(aiNavy, true);
     } else {
         disableUI(false);
     }
@@ -103,7 +113,7 @@ function generatePlayerCells() {
     }
 }
 
-function retaliate(coords) {
+async function retaliate(coords) {
     const attack = compareCoords(coords.x, coords.y, playerNavy);
     const isHit = attack.hit;
     const hitIndex = attack.index;
@@ -111,6 +121,9 @@ function retaliate(coords) {
     if (hitIndex != null) {
         printH3Text('Our ' + playerNavy[hitIndex].type + ' has been hit!');
         printEmText('Careful!!!');
+        checkDamage(hitIndex, playerNavy, false);
+        await getTimer(delay);
+        checkFleetSunk(playerNavy, false);
     }
 }
 
