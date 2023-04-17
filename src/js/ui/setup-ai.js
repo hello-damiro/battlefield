@@ -93,10 +93,7 @@ export const AISetup = (map, ships) => {
                 for (let i = 0; i < ship.length; i++) {
                     const row = isVertical ? x : x + i;
                     const col = isVertical ? y + i : y;
-                    if (row <= xLimit && col <= yLimit) {
-                        // console.log('XY: ' + row + ', ' + col);
-                        occupiedByShip.push([row, col]);
-                    }
+                    if (row <= xLimit && col <= yLimit) occupiedByShip.push([row, col]);
                 }
             };
 

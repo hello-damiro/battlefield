@@ -50,40 +50,44 @@ function checkDamage(index) {
 }
 
 function checkFleetSunk(navy) {
+    disableUI(false);
     let sunkShips = 0;
     navy.forEach((ship) => {
         if (ship.isSunk()) sunkShips++;
     });
-    console.log(sunkShips + '/' + navy.length);
-    if (sunkShips == navy.length) {
-        gameEnded();
-    }
+    if (sunkShips == navy.length) gameEnded();
 }
 
-function gameEnded() {
+async function gameEnded() {
+    disableUI(true);
+    await getTimer(delay * 3);
     printH3Text('You won!');
-    console.log('GAME OVER!');
+    printEmText('Nice work Admiral! Now go back and study the code.');
     odinToggle = false;
     toggleShowShips(aiSetup);
 }
 
 async function attack(coords) {
+    printH3Text('');
+    printEmText('');
+    disableUI(true);
+    await getTimer(delay);
+    const enemyAttackCell = takeRandomAttack();
+    retaliate(enemyAttackCell);
+
     const attack = compareCoords(coords.x, coords.y, aiNavy);
     const isHit = attack.hit;
     const hitIndex = attack.index;
-    const navyShip = aiNavy[hitIndex];
 
     player.attacked(coords.x, coords.y, isHit);
-
     if (hitIndex != null) {
         printH3Text('Nice shot!');
         checkDamage(hitIndex);
         await getTimer(delay);
         checkFleetSunk(aiNavy);
+    } else {
+        disableUI(false);
     }
-    await getTimer(delay);
-    const enemyAttackCell = takeRandomAttack();
-    retaliate(enemyAttackCell);
 }
 
 events.on('player-attacks-xy', attack);
@@ -99,13 +103,6 @@ function generatePlayerCells() {
     }
 }
 
-function takeRandomAttack() {
-    const index = getRandomTo(playerCells.length);
-    const cell = playerCells[index];
-    playerCells.splice(index, 1);
-    return cell;
-}
-
 function retaliate(coords) {
     const attack = compareCoords(coords.x, coords.y, playerNavy);
     const isHit = attack.hit;
@@ -115,6 +112,13 @@ function retaliate(coords) {
         printH3Text('Our ' + playerNavy[hitIndex].type + ' has been hit!');
         printEmText('Careful!!!');
     }
+}
+
+function takeRandomAttack() {
+    const index = getRandomTo(playerCells.length);
+    const cell = playerCells[index];
+    playerCells.splice(index, 1);
+    return cell;
 }
 
 function compareCoords(x, y, navy) {
@@ -142,11 +146,9 @@ function compareCoords(x, y, navy) {
     };
 }
 
-function randomCoords() {
-    return {
-        x: getRandomTo(grid),
-        y: getRandomTo(grid),
-    };
+function disableUI(disable) {
+    if (disable) $('.curtain').classList.remove('hidden');
+    else $('.curtain').classList.add('hidden');
 }
 
 function toggleShowShips(setup) {
