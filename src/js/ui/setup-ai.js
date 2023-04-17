@@ -5,7 +5,6 @@ import { Ship } from '../ship';
 
 export const AISetup = (map, ships) => {
     let dockedShips = [];
-    let selectedCell = { x: 0, y: 0 };
     let occupiedByFleet = [];
     let navy = [];
 
@@ -51,7 +50,21 @@ export const AISetup = (map, ships) => {
         ship.cells = cells;
         navy.push(ship);
         events.emit('ai-navy', navy);
-        // console.log(ship.type + ': ' + navy);
+    }
+
+    function revealAllShips() {
+        navy.forEach((ship, index) => revealShip(index));
+    }
+
+    function revealShip(index) {
+        const x = navy[index].cells[0][0];
+        const x2 = navy[index].cells[1][0];
+        const y = navy[index].cells[0][1];
+        const selector = getSelectorCoordinates(x, y);
+        const cell = map.querySelector(selector);
+        const nucleus = cell.querySelector('.nucleus');
+        nucleus.classList.add(navy[index].type);
+        if (x === x2) nucleus.classList.add('vertical');
     }
 
     function placeShips() {
@@ -87,20 +100,13 @@ export const AISetup = (map, ships) => {
             let isContained = isBounded(x, y, ship.length, isVertical);
             let isOverlap = hasOverlap(occupiedByShip);
             while (isOverlap || !isContained) {
-                // console.log(index + ' OVERLAP: ' + isOverlap + '/' + isContained);
                 placeShip();
                 isOverlap = hasOverlap(occupiedByShip);
                 isContained = isBounded(x, y, ship.length, isVertical);
             }
 
-            const selector = getSelectorCoordinates(x, y);
-            const cell = map.querySelector(selector);
-            const nucleus = cell.querySelector('.nucleus');
-            nucleus.classList.add(ship.type);
-            if (isVertical) nucleus.classList.add('vertical');
             occupiedByFleet.push([...occupiedByShip]);
             createShip(index, occupiedByShip);
-            // events.emit('ai-navy', occupiedByFleet);
         });
     }
 
@@ -109,6 +115,8 @@ export const AISetup = (map, ships) => {
 
     return {
         placeShips: placeShips,
+        revealShip: revealShip,
+        revealAllShips: revealAllShips,
         occupiedByFleet: occupiedByFleet,
     };
 };

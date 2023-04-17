@@ -6,7 +6,7 @@ The Odin Project - Intermediate JS project
 
 LIVE SITE [HERE](https://hello-damiro.github.io/battlefield)
 
-Game design was heavily focused on using the map for each player (AI/user) thats why I cant seem to create a logic to support my vision of the game. I ended up creating 2 different gameboards (aiMap / playerMap) on which game mechanics are designed. Though I finished the procedure of this exrcise, I ended up not using waht I started. I felt that the excercise procedure doesnt support the game logic that Im creating.
+Game design was heavily focused on using the map for each player (AI/user) thats why I cant seem to create a logic to support my vision and process of creating the game based on Odin's challenges/procedures. I ended up creating 2 different gameboards (aiMap / playerMap) on which game mechanics are designed. Though I finished the procedure of this exrcise, I ended up not using what I started.
 
 **Day 1:** Created modules for player, ship, gameboard. Pending gameloop since I think UI will matter when designing it. Designed basic UI at figma.
 

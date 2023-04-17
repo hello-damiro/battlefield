@@ -8,25 +8,22 @@ export const PlayGame = (map) => {
         cells.forEach((cell, index) => {
             const x = cell.getAttribute('data-x');
             const y = cell.getAttribute('data-y');
-            cell.addEventListener('click', () => attacked(x, y, getRandomBool()));
+            cell.addEventListener('click', () => events.emit('player-attacks-xy', { x: x, y: y }));
         });
     }
 
-    function attacked(x, y) {
+    function attacked(x, y, isHit) {
         const cell = map.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
         cell.classList.add('no-click');
 
-        const isHit = hits(x, y);
-        if (isHit) cell.classList.add('hit');
-        else cell.classList.add('miss');
-        events.emit('cell-XY', { x: x, y: y });
-    }
+        console.log(isHit);
 
-    function hits(x, y) {
-        return false;
+        if (isHit == true) cell.classList.add('hit');
+        else cell.classList.add('miss');
     }
 
     return {
+        enableCells: enableCells,
         attacked: attacked,
     };
 };
