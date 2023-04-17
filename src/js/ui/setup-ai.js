@@ -52,19 +52,24 @@ export const AISetup = (map, ships) => {
         events.emit('ai-navy', navy);
     }
 
-    function revealAllShips() {
-        navy.forEach((ship, index) => revealShip(index));
+    function revealAllShips(show) {
+        navy.forEach((ship, index) => revealShip(index, show));
     }
 
-    function revealShip(index) {
+    function revealShip(index, show) {
         const x = navy[index].cells[0][0];
         const x2 = navy[index].cells[1][0];
         const y = navy[index].cells[0][1];
         const selector = getSelectorCoordinates(x, y);
         const cell = map.querySelector(selector);
         const nucleus = cell.querySelector('.nucleus');
-        nucleus.classList.add(navy[index].type);
-        if (x === x2) nucleus.classList.add('vertical');
+        if (show) {
+            nucleus.classList.add(navy[index].type);
+            if (x === x2) nucleus.classList.add('vertical');
+        } else {
+            nucleus.classList.remove(navy[index].type);
+            if (x === x2) nucleus.classList.remove('vertical');
+        }
     }
 
     function placeShips() {

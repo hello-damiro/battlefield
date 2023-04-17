@@ -8,7 +8,9 @@ import { PlayerSetup } from './js/ui/setup-player';
 import { AISetup } from './js/ui/setup-ai';
 import { PlayGame } from './js/ui/play-game';
 import { events } from './js/pubsub';
-import { forEach } from 'lodash';
+
+let odinToggle = true;
+const delay = 800;
 
 let aiNavy = [];
 let playerNavy = [];
@@ -34,8 +36,9 @@ const playerSetup = PlayerSetup(miniMap, ships);
 const player = PlayGame(mainMap);
 const ai = PlayGame(miniMap);
 
-aiSetup.revealAllShips();
 player.enableCells();
+
+$('.odin').addEventListener('click', () => toggleShowShips(aiSetup));
 
 function checkDamage(index) {
     const navyShip = aiNavy[index];
@@ -48,14 +51,20 @@ function checkDamage(index) {
 
 function checkFleetSunk(navy) {
     let sunkShips = 0;
-    navy.isSunk.forEach((element) => {});
+    navy.forEach((ship) => {
+        if (ship.isSunk()) sunkShips++;
+    });
+    console.log(sunkShips + '/' + navy.length);
     if (sunkShips == navy.length) {
         gameEnded();
     }
 }
 
 function gameEnded() {
+    printH3Text('You won!');
     console.log('GAME OVER!');
+    odinToggle = false;
+    toggleShowShips(aiSetup);
 }
 
 async function attack(coords) {
@@ -63,14 +72,15 @@ async function attack(coords) {
     const isHit = attack.hit;
     const hitIndex = attack.index;
     const navyShip = aiNavy[hitIndex];
-    const delay = 100;
+
     player.attacked(coords.x, coords.y, isHit);
+
     if (hitIndex != null) {
         printH3Text('Nice shot!');
-        await getTimer(1000);
         checkDamage(hitIndex);
+        await getTimer(delay);
+        checkFleetSunk(aiNavy);
     }
-
     await getTimer(delay);
     const enemyAttackCell = takeRandomAttack();
     retaliate(enemyAttackCell);
@@ -93,12 +103,10 @@ function takeRandomAttack() {
     const index = getRandomTo(playerCells.length);
     const cell = playerCells[index];
     playerCells.splice(index, 1);
-    console.log(cell);
     return cell;
 }
 
 function retaliate(coords) {
-    // console.log('AI RS: ' + coords.x + '/' + coords.y);
     const attack = compareCoords(coords.x, coords.y, playerNavy);
     const isHit = attack.hit;
     const hitIndex = attack.index;
@@ -139,4 +147,9 @@ function randomCoords() {
         x: getRandomTo(grid),
         y: getRandomTo(grid),
     };
+}
+
+function toggleShowShips(setup) {
+    odinToggle = !odinToggle;
+    setup.revealAllShips(odinToggle);
 }

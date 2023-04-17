@@ -345,4 +345,5 @@ footer .odin {
     width: 24px;
     height: 33px;
     background: url('../assets/images/logo-odin-colored.svg') no-repeat center center;
+    cursor: pointer;
 }
